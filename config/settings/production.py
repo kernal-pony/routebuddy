@@ -1,7 +1,7 @@
 from .base import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
-DEBUG = False
+DEBUG = True
 
 # Host security
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
@@ -20,9 +20,6 @@ DATABASES = {
 
 # Static assets production configurations (collectstatic path)
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# CORS Configuration for Production
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS').split(',')
 
 # ─── SECURITY HEADERS ─────────────────────────────────────────────────────────
 # Force HTTP to HTTPS redirects

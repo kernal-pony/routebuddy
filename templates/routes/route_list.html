@@ -1,0 +1,18 @@
+<h1>Available Routes</h1>
+
+<ul>
+    {% for route in routes %}
+        <li>
+            <a href="{% url 'routes:route_detail' route.id %}">
+                {{ route.title }}
+            </a>
+
+            -
+            {{ route.transport_type.name }}
+        </li>
+
+    {% empty %}
+        <li>No routes found.</li>
+
+    {% endfor %}
+</ul>

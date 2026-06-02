@@ -1,0 +1,34 @@
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<h1>{{ route.title }}</h1>
+
+<p>
+    <strong>Transport:</strong>
+    {{ route.transport_type.name }}
+</p>
+
+<p>
+    <strong>Origin:</strong>
+    {{ route.origin }}
+</p>
+
+<p>
+    <strong>Destination:</strong>
+    {{ route.destination }}
+</p>
+
+<h2>Stops</h2>
+
+<ol>
+    {% for route_stop in route_stops %}
+        <li>
+            {{ route_stop.stop.name }}
+        </li>
+    {% empty %}
+        <li>No stops found.</li>
+    {% endfor %}
+</ol>
