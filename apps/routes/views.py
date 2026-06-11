@@ -2,24 +2,39 @@ from django.shortcuts import (get_object_or_404, render, redirect)
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import *
+from apps.reviews.models import Review
 from .forms import *
 
+from django.db.models import Avg
+from django.db.models import Count
 
-def route_detail(request,route_id):
-    route = get_object_or_404(Route,id=route_id,is_active=True)
+def route_detail(request, route_id):
 
-    route_stops = (route.route_stops.select_related("stop").all())
+    route = get_object_or_404(
+        Route,
+        id=route_id,
+        is_active=True
+    )
+
+    route_stops = (
+        route.route_stops
+        .select_related("stop")
+        .all()
+    )
+
+    reviews = (
+        Review.objects.filter(route=route).select_related("user"))
 
     context = {
         "route": route,
         "route_stops": route_stops,
+        "reviews": reviews,
     }
-    return render(request,"routes/route_detail.html",context)
 
-
+    return render(request, "routes/route_detail.html", context)
 def route_list(request):
-    routes = Route.objects.filter(is_active=True).select_related("transport_type","created_by")
-
+    routes = (Route.objects.filter(is_active=True).select_related("transport_type", "created_by")
+              .annotate(avg_rating=Avg("reviews__rating"), review_count=Count("reviews")))
     context = {
         "routes": routes
     }

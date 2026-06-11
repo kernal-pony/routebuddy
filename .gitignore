@@ -48,3 +48,4 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
+node_modules/

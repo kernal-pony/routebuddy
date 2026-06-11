@@ -23,8 +23,9 @@ THIRD_PARTY_APPS = []
 LOCAL_APPS = [
     'apps.accounts',
     'apps.routes',
+    'apps.reviews',
     # 'apps.suggestions',
-    # 'apps.reviews',
+
     # 'apps.gamification',
     # 'apps.bookmarks',
 ]
@@ -96,3 +97,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom User Model configuration
 # Formatted as 'app_label.ModelName'
 AUTH_USER_MODEL = 'accounts.User'
+

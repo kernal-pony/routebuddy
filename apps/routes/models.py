@@ -16,16 +16,11 @@ class TransportType(models.Model):
     name = models.CharField(
         max_length=50,
         unique=True
-
     )
 
-    description = models.TextField(
-        blank=True
-    )
+    description = models.TextField(blank=True)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -37,55 +32,27 @@ class Route(models.Model):
     Community-created transportation route.
     """
 
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False
-    )
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    title = models.CharField(
-        max_length=200
-    )
+    title = models.CharField(max_length=200)
 
-    description = models.TextField(
-        blank=True
-    )
+    description = models.TextField(blank=True)
 
-    origin = models.CharField(
-        max_length=200
-    )
+    origin = models.CharField(max_length=200)
 
-    destination = models.CharField(
-        max_length=200
-    )
+    destination = models.CharField(max_length=200)
 
-    transport_type = models.ForeignKey(
-        TransportType,
-        on_delete=models.PROTECT,
-        related_name="routes"
-    )
+    transport_type = models.ForeignKey(TransportType, on_delete=models.PROTECT, related_name="routes")
 
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="routes"
-    )
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="routes")
 
-    is_verified = models.BooleanField(
-        default=False
-    )
+    is_verified = models.BooleanField(default=False)
 
-    is_active = models.BooleanField(
-        default=True
-    )
+    is_active = models.BooleanField(default=True)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -125,17 +92,11 @@ class RouteStop(models.Model):
         related_name="route_stops"
     )
 
-    stop = models.ForeignKey(
-        "Stop",
-        on_delete=models.PROTECT,
-        related_name="route_stops"
-    )
+    stop = models.ForeignKey("Stop", on_delete=models.PROTECT, related_name="route_stops")
 
     stop_order = models.PositiveIntegerField()
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ["stop_order"]
@@ -161,3 +122,4 @@ class RouteStop(models.Model):
             f"{self.stop_order} - "
             f"{self.stop.name}"
         )
+

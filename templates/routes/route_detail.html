@@ -23,6 +23,12 @@
 
 <h2>Stops</h2>
 
+{% if user.is_authenticated %}
+    <a href="{% url 'reviews:create' route.id %}">
+        Write Review
+    </a>
+{% endif %}
+
 <ol>
     {% for route_stop in route_stops %}
         <li>
@@ -32,3 +38,34 @@
         <li>No stops found.</li>
     {% endfor %}
 </ol>
+<h2>Reviews</h2>
+
+{% for review in reviews %}
+
+    <div>
+
+        <p>
+            Rating:
+            {{ review.rating }}/5
+        </p>
+
+        <p>
+            {{ review.comment }}
+        </p>
+
+        <p>
+            By:
+            {{ review.user }}
+        </p>
+
+    </div>
+
+    <hr>
+
+{% empty %}
+
+    <p>
+        No reviews yet.
+    </p>
+
+{% endfor %}
