@@ -1,39 +1,7 @@
-{% if user.is_authenticated %}
-    <p>
-        Welcome {{ user.username }}
-    </p>
+{% extends "base.html" %}
 
-    <a href="{% url 'accounts:logout' %}">
-        Logout
-    </a>
-{% endif %}
-
-<h1>Available Routes</h1>
-
-<ul>
-    {% for route in routes %}
-        <li>
-            <a href="{% url 'routes:route_detail' route.id %}">
-                {{ route.title }}
-
-            </a>
-    <p>
-        Average Rating:
-        {{ route.avg_rating }}
-    </p>
-
-    <p>
-        Total Reviews:
-        {{ route.review_count }}
-    </p>
-
-            -
-            {{ route.transport_type.name }}
-        </li>
-
-    {% empty %}
-        <li>No routes found.</li>
-
-    {% endfor %}
-
-</ul>
+{% block content %}
+<h1 class="text-4xl font-bold text-blue-600">
+    Tailwind is working!
+</h1>
+{% endblock %}
